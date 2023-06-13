@@ -61,6 +61,9 @@ class TasksController extends Controller
     {
         $task = Task::findOrFail($id);
 
+        if ($task->user_id !== Auth::id()) {
+            return redirect('/');
+        }
         return view('tasks.show', [
             'task' => $task,
         ]);
